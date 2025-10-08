@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './App.css'
-import debounce from '../../js-snippets/src/core-js/debounce'
 import axios from 'axios'
 import Defintion from './components/Definition'
 
@@ -8,11 +7,18 @@ import Defintion from './components/Definition'
     const [searchTerm, setSearchTerm] = useState('')
     const [search, setSearch] = useState(false)
     const [data, setData] = useState(null)
+    const [loading, setLoading] = useState(false)
    
 
     function getData() {
+      setLoading(true)
       axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`).then((response) => {
+        setLoading(false)
         setData(response.data)
+      }).catch((err) => {
+        setLoading(false)
+        setData(null)
+        console.log("Error pulling data:", err)
       })
     }
     
@@ -34,7 +40,7 @@ import Defintion from './components/Definition'
           setSearch(true)
         }}
         >Search</button>
-        <Defintion infoProp={data} searchProp={search} searchTermProp={searchTerm}/>
+        <Defintion infoProp={data} searchProp={search} searchTermProp={searchTerm} loading={loading}/>
       </div>
     )
 

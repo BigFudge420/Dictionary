@@ -1,6 +1,10 @@
-export default function Definition({ infoProp, searchProp, searchTermProp }) {
+export default function Definition({ infoProp, searchProp, searchTermProp, loading }) {
   if (!searchProp) {
     return <p>Start by searching for a word.</p>;
+  }
+
+  if (searchProp && loading){
+    return <p>Loading...</p>
   }
 
   if (searchProp && infoProp && infoProp.length > 0) {
