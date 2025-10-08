@@ -1,12 +1,20 @@
 import { useState } from 'react'
 import './App.css'
-import useFetchDefinition from './components/useFetchDefinition'
 import debounce from '../../js-snippets/src/core-js/debounce'
+import axios from 'axios'
+import Defintion from './components/Definition'
 
   function App() {
-    const [word, setWord] = useState('hello')
-    let info = useFetchDefinition(word)
-    let debouncedSetWord = debounce(setWord, 1000)
+    const [searchTerm, setSearchTerm] = useState('')
+    const [search, setSearch] = useState(false)
+    const [data, setData] = useState(null)
+   
+
+    function getData() {
+      axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`).then((response) => {
+        setData(response.data)
+      })
+    }
     
     return (
       <div>
@@ -14,12 +22,19 @@ import debounce from '../../js-snippets/src/core-js/debounce'
         name='searchTerm' 
         id='searchTerm' 
         className='border border-black'
-        onChange={(e) => debouncedSetWord(e.target.value)}
         placeholder='Search'
+        onChange={(e) => {
+          setSearchTerm(e.target.value)
+
+        }}
         />
         <button className='bg-black text-white'
-        onClick={() => console.log(info)}
+        onClick={() => {
+          getData(searchTerm)
+          setSearch(true)
+        }}
         >Search</button>
+        <Defintion infoProp={data} searchProp={search} searchTermProp={searchTerm}/>
       </div>
     )
 
