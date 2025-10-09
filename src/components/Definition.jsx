@@ -1,43 +1,75 @@
+import { HiMiniSpeakerWave } from "react-icons/hi2"
+
 export default function Definition({ infoProp, searchProp, searchTermProp, loading }) {
+  let audioFile
+  if (infoProp){
+    audioFile = infoProp[0].phonetics.map((entry) => entry.audio).filter(Boolean)
+  }
+
+  function playAudio(){
+    let audio = new Audio(audioFile[0])
+    audio.play()
+  }
+
   if (!searchProp) {
-    return <p>Start by searching for a word.</p>;
-  }
-
-  if (searchProp && loading){
-    return <p>Loading...</p>
-  }
-
-  if (searchProp && infoProp && infoProp.length > 0) {
     return (
-      <div>
-        <h2>Results for “{searchTermProp}”</h2>
-
-        {infoProp.map((entry, i) => (
-          <div key={i} className="mb-4">
-            <h3 className="text-xl font-semibold">{entry.word}</h3>
-            {entry.phonetic && <p>{entry.phonetic}</p>}
-
-            {entry.meanings.map((meaning, j) => (
-              <div key={j}>
-                <p className="italic">{meaning.partOfSpeech}</p>
-
-                {meaning.definitions.map((d, k) => (
-                  <div key={k} className="ml-4 mb-2">
-                    <p>{d.definition}</p>
-                    {d.example && <p className="text-gray-600">“{d.example}”</p>}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        ))}
+      <div className="flex justify-center items-center">
+        <p>Start by searching for a word.</p>
       </div>
     );
   }
 
-  if (searchProp && (!infoProp || infoProp.length === 0)) {
-    return <p>No definitions found for “{searchTermProp}”.</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center">
+        <p>Loading...</p>
+      </div>
+    );
   }
 
-  return null;
+  if (infoProp && infoProp.length > 0) {
+    const phonetics = infoProp
+      .map((entry) => entry.phonetic)
+      .filter(Boolean)
+      .join(", ");
+
+    return (
+      <div className="flex justify-center items-center flex-col">
+        <div className="flex items-center justify-center gap-2">
+          <div className="text-center">
+            <h1 className="font-semibold text-3xl">{infoProp[0].word}</h1>
+            {phonetics && <p className="text-gray-700 mb-4 text-sm">{phonetics}</p>}
+          </div>
+          {audioFile.length > 0 && <button onClick={() => playAudio()}><HiMiniSpeakerWave className='h-6 w-6'/></button>}
+        </div>
+        {infoProp[0].origin && <p>Origin:{infoProp[0].origin}</p>}
+
+        {infoProp.map((entry, i) =>
+          entry.meanings.map((meaning, j) => (
+            <div
+              key={`${i}-${j}`}
+              className="border-black border-2 my-4 p-4 w-[920px] max-w-[920px] text-black rounded-2xl hover:shadow-xl hover:shadow-black/45 transition-shadow duration-300"
+            >
+              <p className="italic">{meaning.partOfSpeech}</p>
+
+              <div className="ml-4 mb-2 text-left">
+                <p className="font-mono">– {meaning.definitions[0].definition}</p>
+                {meaning.definitions[0].example && (
+                  <p className="text-gray-600 italic">  
+                    Example: “{meaning.definitions[0].example}”
+                  </p>
+                )}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex justify-center items-center">
+      <p>No definitions found for “{searchTermProp}”.</p>
+    </div>
+  );
 }
