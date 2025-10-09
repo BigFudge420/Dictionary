@@ -13,16 +13,16 @@ export default function Definition({ infoProp, searchProp, searchTermProp, loadi
 
   if (!searchProp) {
     return (
-      <div className="flex justify-center items-center">
-        <p>Start by searching for a word.</p>
+      <div className="flex justify-center items-center absolute top-2/4 left-[34.375rem]">
+        <p className="text-3xl">Start by searching for a word.</p>
       </div>
     );
   }
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center">
-        <p>Loading...</p>
+      <div className="flex justify-center items-center absolute top-2/4 left-[41.25rem]">
+        <p className="text-3xl">Loading...</p>
       </div>
     );
   }
@@ -68,8 +68,8 @@ export default function Definition({ infoProp, searchProp, searchTermProp, loadi
   }
 
   return (
-    <div className="flex justify-center items-center">
-      <p>No definitions found for “{searchTermProp}”.</p>
+    <div className="flex justify-center items-center absolute top-2/4 left-[34.375rem]">
+      <p className="text-3xl">No definitions found for “{searchTermProp}”.</p>
     </div>
   );
 }
