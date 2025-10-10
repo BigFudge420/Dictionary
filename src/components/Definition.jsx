@@ -69,7 +69,7 @@ export default function Definition({ infoProp, searchProp, searchTermProp, loadi
 
   return (
     <div className="flex justify-center items-center">
-      <p className="text-3xl">No definitions found for “{searchTermProp}”.</p>
+      <p className="text-3xl mx-3 text-center">No definitions found for “{searchTermProp}”.</p>
     </div>
   );
 }
