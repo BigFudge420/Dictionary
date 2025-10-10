@@ -14,7 +14,7 @@ export default function Definition({ infoProp, searchProp, searchTermProp, loadi
   if (!searchProp) {
     return (
       <div className="flex justify-center items-center">
-        <p className="text-3xl mx-3">Start by searching for a word.</p>
+        <p className="text-3xl mx-3 text-center">Start by searching for a word.</p>
       </div>
     );
   }
