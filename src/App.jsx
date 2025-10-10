@@ -9,11 +9,12 @@ import Defintion from './components/Definition'
     const [search, setSearch] = useState(false)
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(false)
+    let replacedTerm = searchTerm.replaceAll(' ', '')
    
 
     function getData() {
       setLoading(true)
-      axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`).then((response) => {
+      axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${replacedTerm}`).then((response) => {
         setLoading(false)
         console.log(response.data)
         setData(response.data)
@@ -33,13 +34,13 @@ import Defintion from './components/Definition'
           onChange={(e) => {setSearchTerm(e.target.value)}}/>
 
           <button className='flex items-center justify-center'
-          onClick={() => {getData(searchTerm); setSearch(true)}}>
+          onClick={() => {getData(replacedTerm); setSearch(true)}}>
             <FaSearch className='h-6 w-6'/>
           </button>
 
         </div>
 
-        <Defintion infoProp={data} searchProp={search} searchTermProp={searchTerm} loading={loading}/>
+        <Defintion infoProp={data} searchProp={search} searchTermProp={replacedTerm} loading={loading}/>
       </div>
     )
 
