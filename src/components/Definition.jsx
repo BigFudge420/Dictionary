@@ -48,7 +48,7 @@ export default function Definition({ infoProp, searchProp, searchTermProp, loadi
           entry.meanings.map((meaning, j) => (
             <div
               key={`${i}-${j}`}
-              className="border-black border-2 my-4 p-4 w-[920px] max-w-[920px] text-black rounded-2xl hover:shadow-xl hover:shadow-black/45 transition-shadow duration-300"
+              className="border-black border-2 my-4 p-4 w-[920px] max-lg:max-w-[48rem] max-md:max-w-[40rem] max-sm:max-w-[18.75rem] text-black rounded-2xl hover:shadow-xl hover:shadow-black/45 transition-shadow duration-300"
             >
               <p className="italic">{meaning.partOfSpeech}</p>
 
