@@ -13,6 +13,7 @@ import Defintion from './components/Definition'
    
 
     function getData() {
+      console.log(replacedTerm)
       setLoading(true)
       axios.get(`/api/dictionary?word=${replacedTerm}`).then((response) => {
         setLoading(false)
