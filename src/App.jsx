@@ -9,7 +9,7 @@ import Defintion from './components/Definition'
     const [search, setSearch] = useState(false)
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(false)
-    let replacedTerm = searchTerm.replaceAll(' ', '')
+    const replacedTerm = encodeURIComponent(searchTerm.trim())
    
 
     function getData() {
