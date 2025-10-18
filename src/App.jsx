@@ -34,7 +34,7 @@ import Defintion from './components/Definition'
           onChange={(e) => {setSearchTerm(e.target.value)}}/>
 
           <button className='flex items-center justify-center'
-          onClick={() => {getData(replacedTerm); setSearch(true)}}>
+          onClick={() => {getData(); setSearch(true)}}>
             <FaSearch className='h-6 w-6'/>
           </button>
 
