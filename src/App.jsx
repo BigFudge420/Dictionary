@@ -14,7 +14,7 @@ import Defintion from './components/Definition'
 
     function getData() {
       setLoading(true)
-      axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${replacedTerm}`).then((response) => {
+      axios.get(`/api/api/v2/entries/en/${replacedTerm}`).then((response) => {
         setLoading(false)
         console.log(response.data)
         setData(response.data)
