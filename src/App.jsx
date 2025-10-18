@@ -14,7 +14,7 @@ import Defintion from './components/Definition'
 
     function getData() {
       setLoading(true)
-      axios.get(`/api/v2/entries/en/${replacedTerm}`).then((response) => {
+      axios.get(`/api/dictionary?word=${replacedTerm}`).then((response) => {
         setLoading(false)
         console.log(response.data)
         setData(response.data)
