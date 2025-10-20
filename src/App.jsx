@@ -9,13 +9,14 @@ import Defintion from './components/Definition'
     const [search, setSearch] = useState(false)
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(false)
+
     const replacedTerm = encodeURIComponent(searchTerm.trim())
    
 
     function getData() {
       console.log(replacedTerm)
       setLoading(true)
-      axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${replacedTerm}`).then((response) => {
+      axios.get(`https://dictionary-xi-wheat.vercel.app/api/dictionary?word=hello`).then((response) => {
         setLoading(false)
         console.log(response.data)
         setData(response.data)
