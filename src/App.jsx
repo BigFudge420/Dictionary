@@ -16,7 +16,7 @@ import Defintion from './components/Definition'
     function getData() {
       console.log(replacedTerm)
       setLoading(true)
-      axios.get(`https://dictionary-xi-wheat.vercel.app/api/dictionary?word=hello`).then((response) => {
+      axios.get(`https://dictionary-xi-wheat.vercel.app/api/dictionary?word=${replacedTerm}`).then((response) => {
         setLoading(false)
         console.log(response.data)
         setData(response.data)
